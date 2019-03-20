@@ -44,7 +44,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-        this.oneSignal.startInit('6818eca8-2631-44d8-91df-e323ae0d5b60', '703322744261');
+        this.oneSignal.startInit('6818eca8-2631-44d8-91df-e323ae0d5b60', '256550615333');
 
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
