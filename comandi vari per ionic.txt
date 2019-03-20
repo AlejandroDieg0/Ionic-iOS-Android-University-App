@@ -1,0 +1,21 @@
+git clone https://github.com/AlejandroDieg0/DocentiPush.git
+
+# installare dipendenze
+npm install -g ionic
+npm install @ionic/angular@latest --save
+npm install -g ios-sim ios-deploy
+
+# apri su browser
+ionic serve
+ionic serve -c
+
+# bestemmia, spegni e riaccendi
+cordova plugin save
+cordova platform rm ios
+cordova platform add ios
+
+# prepare il progetto xcode (dopo apri xcode e metti la firma)
+ionic cordova prepare ios --buildFlag='-UseModernBuildSystem=0'
+
+# build ipa e archivio
+ionic cordova build ios --device -- --buildFlag="-UseModernBuildSystem=0"
