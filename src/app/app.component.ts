@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @Component({
   selector: 'app-root',
@@ -16,24 +17,48 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
+      title: 'Docenti',
       url: '/list',
       icon: 'list'
-    }
+    },
+      {
+          title: 'Ricerca',
+          url: '/ricerca',
+          icon: 'person'
+      }
+
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private oneSignal: OneSignal
   ) {
     this.initializeApp();
+
+
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+        this.oneSignal.startInit('6818eca8-2631-44d8-91df-e323ae0d5b60', '703322744261');
+
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+        this.oneSignal.handleNotificationReceived().subscribe((res) => {
+          console.log(res);
+            // do something when notification is received
+        });
+
+        this.oneSignal.handleNotificationOpened().subscribe((res) => {
+          console.log(res);
+            // do something when a notification is opened
+        });
+
+        this.oneSignal.endInit();
     });
   }
 }

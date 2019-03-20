@@ -8,13 +8,12 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    path: 'home', loadChildren: './home/home.module#HomePageModule'
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  }
+    path: 'list', loadChildren: './list/list.module#ListPageModule'
+  },
+  { path: 'ricerca', loadChildren: './ricerca/ricerca.module#RicercaPageModule' }
 ];
 
 @NgModule({

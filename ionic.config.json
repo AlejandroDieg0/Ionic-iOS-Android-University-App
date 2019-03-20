@@ -1,5 +1,7 @@
 {
   "name": "DocentiPush",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
