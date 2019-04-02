@@ -17,13 +17,13 @@ export class ListPage implements OnInit {
 
   loadData(){
     let data:Observable<any>;
-    data = this.http.get("https://jsonplaceholder.typicode.com/posts");
+    data = this.http.get("assets/elenco_docenti.json");
     data.subscribe(result=> {
       this.items=result;
     })
   }
   itemClick(itemid:number){
-    alert("l'id che hai cliccato è "+itemid);
+    alert("il professore che hai cliccato ha id "+itemid);
     window['plugins'].OneSignal.sendTag(itemid, itemid);
   }
   ngOnInit() {
