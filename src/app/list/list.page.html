@@ -4,24 +4,17 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List
+      Lista Docenti
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
+    <ion-item *ngFor="let items of items" (click)="itemClick(items.id)">
+      <h2>{{items.id}}</h2>
+      {{items.title}}
     </ion-item>
   </ion-list>
-
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
 
 </ion-content>
