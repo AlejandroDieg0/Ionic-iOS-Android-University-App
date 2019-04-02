@@ -16,8 +16,6 @@ export class ListPage implements OnInit {
   }
 
   loadData(){
-
-
     let data:Observable<any>;
     data = this.http.get("https://jsonplaceholder.typicode.com/posts");
     data.subscribe(result=> {
@@ -25,11 +23,10 @@ export class ListPage implements OnInit {
     })
   }
   itemClick(itemid:number){
-    alert(itemid);
+    alert("l'id che hai cliccato è "+itemid);
+    window['plugins'].OneSignal.sendTag(itemid, itemid);
   }
   ngOnInit() {
-
-    window['plugins'].OneSignal.sendTag("key", "value");
 
     window['plugins'].OneSignal.getTags(function(tags) {
       console.log('Tags Received: ' + JSON.stringify(tags));
