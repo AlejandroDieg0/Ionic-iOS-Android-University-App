@@ -31,7 +31,14 @@ export class ListPage implements OnInit {
   }
 
   ngOnInit() {
+
+    window['plugins'].OneSignal.sendTag("a", "b");
+
+    window['plugins'].OneSignal.getTags(function(tags) {
+      console.log('Tags Received: ' + JSON.stringify(tags));
+    });
   }
+
   // add back when alpha.4 is out
   // navigate(item) {
   //   this.router.navigate(['/list', JSON.stringify(item)]);

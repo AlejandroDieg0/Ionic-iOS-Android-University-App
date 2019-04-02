@@ -41,6 +41,7 @@ export class AppComponent {
   }
 
   initializeApp() {
+
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -59,6 +60,8 @@ export class AppComponent {
         });
 
         this.oneSignal.endInit();
+
+
     });
   }
 }
