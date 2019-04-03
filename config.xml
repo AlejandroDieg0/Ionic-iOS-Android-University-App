@@ -81,10 +81,10 @@
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationAlwaysUsageDescription">
             <string>Consenti l'uso del GPS per trovare le aule</string>
         </edit-config>
-        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription ">
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
             <string>Consenti l'uso del GPS per trovare le aule</string>
         </edit-config>
-        <edit-config file="*-Info.plist" mode="merge" target="ITSAppUsesNonExemptEncryption ">
+        <edit-config file="*-Info.plist" mode="merge" target="ITSAppUsesNonExemptEncryption">
             <false />
         </edit-config>
     </platform>
