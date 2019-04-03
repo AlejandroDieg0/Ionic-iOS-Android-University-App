@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from "@ionic/angular";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { NavController } from '@ionic/angular';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -10,21 +10,22 @@ import {Observable} from "rxjs";
 })
 export class ListPage implements OnInit {
 
-  public items:any;
-  constructor(public navCtrl: NavController, public http: HttpClient){
-  this.loadData();
+  public items: any;
+  constructor(public navCtrl: NavController, public http: HttpClient) {
+    this.loadData();
   }
 
-  loadData(){
-    let data:Observable<any>;
-    data = this.http.get("assets/elenco_docenti.json");
-    data.subscribe(result=> {
-      this.items=result;
-    })
+  loadData() {
+    let data: Observable<any>;
+    data = this.http.get('assets/elenco_docenti.json');
+    data.subscribe(result => {
+      this.items = result;
+    });
   }
-  itemClick(itemid:number){
-    alert("il professore che hai cliccato ha id "+itemid);
-    window['plugins'].OneSignal.sendTag(itemid, itemid);
+  itemClick(item: number) { // passo item come dizionario, cosi ho tutti gli attributi
+    alert('Ti sei iscritto agli avvisi del professor ' +
+            item['nome'] + ' ' + item['cognome'] + '\nID:' + item['id'] );
+    window['plugins'].OneSignal.sendTag(item['id'], 1);
   }
   ngOnInit() {
 
