@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar placeholder="Ricerca Docente" [(ngModel)]="searchTerm" (ionInput)="filterItem()" ></ion-searchbar>
+  <ion-searchbar placeholder="Ricerca Docente ..." [(ngModel)]="searchTerm" (ionInput)="filterItem()" ></ion-searchbar>
   <ion-list> 
     <!-- <ion-item *ngFor="let items of items" (click)="itemClick(items)"> -->
     <ion-item *ngFor="let items of filteredItems" (click)="toDetailPage(items)">
