@@ -10,7 +10,9 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar placeholder="Ricerca Docente ..." [(ngModel)]="searchTerm" (ionInput)="filterItem()" ></ion-searchbar>
+  <!-- sostituito ionInput con ionChange, cosi se cancelli la ricerca torna come prima -->
+  <!-- aggiunto ionClear, ionCancel sembra superfluo -->
+  <ion-searchbar placeholder="Ricerca Docente ..." [(ngModel)]="searchTerm" (ionChange)="filterItem()" (ionCancel)="loadData()" (ionClear)="loadData()"></ion-searchbar>
   <ion-list> 
     <!-- <ion-item *ngFor="let items of items" (click)="itemClick(items)"> -->
     <ion-item *ngFor="let items of filteredItems" (click)="toDetailPage(items)">

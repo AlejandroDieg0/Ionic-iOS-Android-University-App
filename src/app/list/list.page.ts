@@ -28,12 +28,16 @@ export class ListPage implements OnInit {
     data = this.http.get('assets/elenco_docenti.json');
     data.subscribe(result => {
       this.items = result;
-      this.filteredItems= this.items;
+      this.filteredItems = this.items;
     });
   }
 
-  filterItem(){
-    this.filteredItems = this.items.filter(item =>  item['cognome'].toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
+  filterItem() {
+    if ( this.searchTerm.length ) {
+      this.filteredItems = this.items.filter(item =>  item['cognome'].toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
+    } else {
+      this.loadData();
+    }
   }
 
   toDetailPage(item: number) {
