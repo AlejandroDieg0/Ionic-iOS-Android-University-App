@@ -15,6 +15,8 @@ export class ListPage implements OnInit {
   nome = '';
   cognome = '';
   id = '';
+  filteredItems: any;
+  searchTerm: string;
   public items: any;
 
   constructor(public navCtrl: NavController, public http: HttpClient, private router: Router) {
@@ -26,7 +28,12 @@ export class ListPage implements OnInit {
     data = this.http.get('assets/elenco_docenti.json');
     data.subscribe(result => {
       this.items = result;
+      this.filteredItems= this.items;
     });
+  }
+
+  filterItem(){
+    this.filteredItems = this.items.filter(item =>  item['cognome'].toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
   }
 
   toDetailPage(item: number) {
@@ -41,29 +48,3 @@ export class ListPage implements OnInit {
 
   }
 }
-/*
-esperimenti di merda per i gettags
-
-in gettags
-alert('test2' + JSON.parse(tags) ); // NON funziona
-alert('test3' + tags[0] );
-this.items = [ 1, 2, 3, 4, 5, 6 ]; // non funziona, presumo che non trovi "this"
-
-esperimenti per rinominare i json, inutili
-  loadData_daitag() { // scarica i tag e li mette nell'elenco
-    // this.items = [1, 2, 3 ];
-    // funziona
-    // this.items = JSON.parse('[{"cognome" : "c","id" : "1","nome" : "n"},{"cognome" : "f","id" : "2","nome" : "N"}]');
-    let stringa = '{"33" : "AA", "44" : "BB" }';
-    this.items = JSON.parse(stringa);
-    stringa = stringa.replace('{', '[');
-    stringa = stringa.replace('}', ']');
-    alert(
-      JSON.parse('["33" : "AA", "44" : "BB"]')
-      // stringa
-    );
-    this.items[0] = 33;
-    this.items[1] = 33;
-  }
-
-*/

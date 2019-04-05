@@ -21,11 +21,6 @@ export class AppComponent {
       url: '/list',
       icon: 'list'
     },
-      {
-          title: 'Ricerca',
-          url: '/search',
-          icon: 'person'
-      },
     {
       title: 'Iscrizioni',
       url: '/subscriptions',
