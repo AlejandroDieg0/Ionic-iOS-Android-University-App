@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Prof. {{cognome}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <p align="center"> <ion-avatar>
+        <img src="/assets/icon.png">
+        </ion-avatar>
+        </p>
+
+         <p align="center"> Nome: {{nome}}</p>
+         <p align="center"> Cognome: {{cognome}}</p>
+         <p align="center"> ID: {{id}}</p>
+
+
+    <ion-button expand="block"  (click)="subscribe()">Iscriviti agli avvisi</ion-button>
+    <ion-button expand="block" (click)="unsubscribe()">Disiscriviti</ion-button>
+    </ion-card>
+
+
+
+</ion-content>

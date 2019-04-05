@@ -23,9 +23,14 @@ export class AppComponent {
     },
       {
           title: 'Ricerca',
-          url: '/ricerca',
+          url: '/search',
           icon: 'person'
-      }
+      },
+    {
+      title: 'Iscrizioni',
+      url: '/subscriptions',
+      icon: 'notifications'
+    }
 
   ];
 

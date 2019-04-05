@@ -4,16 +4,16 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Lista Docenti
+      Lista Iscrizioni
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list> 
+  <ion-list>
     <!-- <ion-item *ngFor="let items of items" (click)="itemClick(items)"> -->
     <ion-item *ngFor="let items of items" (click)="toDetailPage(items)">
-    <!-- passo items come dizionario, cosi ho tutti gli attributi -->
+      <!-- passo items come dizionario, cosi ho tutti gli attributi -->
       <ion-label>{{items.cognome}}</ion-label>
       {{items.nome}}
 

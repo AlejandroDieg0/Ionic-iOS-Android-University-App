@@ -13,7 +13,9 @@ const routes: Routes = [
   {
     path: 'list', loadChildren: './list/list.module#ListPageModule'
   },
-  { path: 'ricerca', loadChildren: './ricerca/ricerca.module#RicercaPageModule' }
+  { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
+  { path: 'detail', loadChildren: './detail/detail.module#DetailPageModule' },
+  { path: 'subscriptions', loadChildren: './subscriptions/subscriptions.module#SubscriptionsPageModule' }
 ];
 
 @NgModule({
