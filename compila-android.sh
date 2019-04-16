@@ -1,4 +1,5 @@
-/usr/bin/env bash
+#!/usr/bin/env bash
+set -e
 echo "Compilo versione debug android"
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/
 ionic cordova build android
