@@ -1,12 +1,19 @@
+branches:
+  only:
+  - travis
+
 language: objective-c
 os: osx
 osx_image: xcode11.3
 
-cache: false
+cache:
+  bundler: true
+  cocoapods: true
+  npm: false
 
 before_install:
   - export LANG=it_IT.UTF-8
-  - brew update
+  #- brew update
   #- brew install cocoapods node
 
 install:
@@ -41,13 +48,13 @@ script:
   - npm install -g cordova
   - npm install -g @ionic/cli native-run cordova-res
   - npm install --save-dev @angular-devkit/build-angular
-  - pod repo update #per far trovare onesignal
+  #- pod repo update #per far trovare onesignal
   
   # - install plugins etc.
+  - ionic cordova platform add ios@latest --save
   - ionic cordova prepare
   - ionic cordova plugin add onesignal-cordova-plugin
   - ionic cordova plugin add cordova-plugin-ionic-webview@latest
-  - ionic cordova platform add ios@latest --save
 
   # build Android and iOS packages
   #- cordova build android --release
