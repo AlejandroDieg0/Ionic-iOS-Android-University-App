@@ -39,9 +39,9 @@ export class SubscriptionsPage implements OnInit {
     let data: Observable<any>;
     data = this.http.get('assets/elenco_docenti.json');
     data.subscribe(result => {
-      // alert('data pre: ' + this.globalService.bestia); // funziona
-      // this.globalService.bestia += 'vaffanculo';
-      // alert('data post: ' + this.globalService.bestia);
+      // alert('data pre: ' + this.globalService.testb1); // funziona
+      // this.globalService.testb1 += 'vfff';
+      // alert('data post: ' + this.globalService.testb1);
       // alert('data pre: ' + this.items); // ok se non è any
       // Object.entries(this.items).forEach(
       //   ( [indice, valore], indice2, boh2 ) => {
@@ -68,28 +68,28 @@ export class SubscriptionsPage implements OnInit {
       // alert(JSON.stringify(myjson[0].cognome));
       // qp.push(myjson);
       // alert(qp[0].JSON());
-      alert('bestia2: ' + this.globalService.bestia2 );
+      // alert('test b2: ' + this.globalService.testb2 );
       // this.onesignal.getTags().then(function(tags) {
       //   alert('speranza 1: ' + this.items); // se ne sbatte la michia e non parte
-      //   alert('speranza 2: ' + this.globalService.bestia);
+      //   alert('speranza 2: ' + this.globalService.testb1);
       // });
       window['plugins'].OneSignal.sendTag('test', 'pippozzo 33');
-      let bestiaos = window['plugins'].OneSignal.getTags(function(tags) {
-        alert('onesignal parte');
-        bestiaos = '33';
-        alert('bestia ones: ' + String(bestiaos));
-        bestiaos = JSON.stringify(tags);
+      let testos1 = window['plugins'].OneSignal.getTags(function(tags) {
+        //alert('onesignal parte');
+        //testos1 = '33';
+        //alert('test ones: ' + String(testos1));
+        //testos1 = JSON.stringify(tags);
         // alert(this.items); // non funziona
         // alert(window['SubscriptionsPage'].items); // non funziona
-        // alert('os glob 1: ' + this.globalService.bestia);
-        // this.globalService.bestia += ' io ti maledico !';
-        // alert('os glob 2: ' + this.globalService.bestia);
+        // alert('os glob 1: ' + this.globalService.testb1);
+        // this.globalService.testb1 += ' io ti maledico !';
+        // alert('os glob 2: ' + this.globalService.testb1);
         // Object.entries(this.items).forEach(
         //   ( [indice, valore], indice2, boh2 ) => alert('foreach  onesignal:\n' +  valore) // funziona !
         // );
         console.log('one signal tags stringify: ' + JSON.stringify(tags));
-        alert('one signal tags stringify: ' + JSON.stringify(tags)); // mostra un avviso con i tag, utile per debug
-        alert('one signal tags.test stringify: ' + JSON.stringify(tags.test)); // funziona
+        //alert('one signal tags stringify: ' + JSON.stringify(tags)); // mostra un avviso con i tag, utile per debug
+        //alert('one signal tags.test stringify: ' + JSON.stringify(tags.test)); // funziona
         // for (let key in tags) {
         //     alert('for 1: ' + key); // funziona !
         //     alert('for 1: ' + tags[key]); // funziona !
@@ -102,12 +102,12 @@ export class SubscriptionsPage implements OnInit {
         // alert('one signal tags[0] stringify: ' + JSON.stringify(tags[0])); // FALLISCE - non fa andare avanti
         // alert( Object.entries(tags).push(this.SubscriptionsPage.items) );
         // alert(this.SubscriptionsPage.items);
-        alert('fine onesignal');
+        //alert('fine onesignal');
       });
-      alert('test bestia 1: ' + bestiaos); // ovviamente per un fatto di tempo non lo trova
-      setTimeout(function () {
-        alert('test bestia 2: ' + bestiaos); // lo trova O.O
-      }, 5000);
+      //alert('test testos1 A: ' + testos1); // ovviamente per un fatto di tempo non lo trova
+      //setTimeout(function () {
+      //  alert('test testos1 B: ' + testos1); // lo trova O.O
+      //}, 5000);
     }); // fine data.subscribe
 
   } // fine loaddata
