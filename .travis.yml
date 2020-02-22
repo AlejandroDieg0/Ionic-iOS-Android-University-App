@@ -11,56 +11,113 @@ cache:
   cocoapods: true
   npm: true
 
+addons:
+  homebrew: # non sembra funzionare
+    update: true
+    taps:
+    #- homebrew/cask-versions
+    - AdoptOpenJDK/openjdk
+    packages:
+    - gradle
+    #- cocoapods
+    #- node
+    casks:
+    - adoptopenjdk8
+    #- android-sdk
+    #- android-platform-tools
+
+env:
+  #jobs:
+  #  - BUILD_PER_IOS
+  #  - BUILD_PER_ANDROID
+  global:
+  - secure: vubR7ZCrIhiewZmdjTx8p26Qn939VcLkAfjrkCTQbZJ+5izB3VG1ZV1ePk0ZkXHNDPOfbm3OZDwDE857hHWx+LQPMAcrvCuQPfs6hBocNekimj6Arn7LRFQt/9Dn+sPYCT2BeUXDEsJKlbMo3ZVVqjcd6ljgCjZBuq0t7qFi1l8+cag6tKo9HHz1O+YZqCIQLEy7ujXx6ZmdUv0XDAZDn6m0IigBeXtRmMU1Hzjmd789LnRG+5zkPxjt7TdRyMZop7BG94oeU2hAETbMgvgKSKkfqezjOTNP1gYoLBe5R6X6JAth1lsPYQJPjhRt8TfWolHz0lUOFMO6p6xiFxKOvxr2PctTJFigtvxLhH+lYeGfSMqpaR6tPGR5CJwJGcQkkuT2+zEs5Z/NDZND/ymHM2Jq54Yl/JzuP45yFiWsCR2P2Ve9wMaSzqMhWE2Z9Dg/68bzwCVCTbD71GPq9Zvb1ZT0URH3Rad6QElmbIKLAVfkKZ838QZhd9B2IJ7sgVgEEfxBYaIGcPr53l49PlK2OxR+r3xnK9JRzFDyVDdI/DQqnFHdTwxLYz8CgimrXZPAFDJMTdrmfhH5/vv246H+PBdCkdPzpjXYLJ8Fit+d/jK2SsdLPMVLHpaTw70vPS+FdN2XXFqp7i1onKZHhfB3+9cb3xUhnB0DrEuJebIg7Aw=
+
 before_install:
   - export LANG=it_IT.UTF-8
-  #- brew update
-  #- brew install cocoapods node
+  - export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
+  - echo "DIRECTORY CORRENTE:" # /Users/travis/build/RobertoD91/DocentiPush
+  - pwd
+  - ls
+  - ls ~
+  # - export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+  # - export ANDROID_HOME=/usr/local/share/android-sdk
 
 install:
-  # install minimum set of dependencies to run tests and linters
-  - npm install -g npm gulp bower
+  ## install minimum set of dependencies to run tests and linters
+  #- npm install -g npm gulp bower
+  - brew install gradle
+  #- brew cask install android-platform-tools android-sdk
+  - brew tap AdoptOpenJDK/openjdk
+  - brew cask install adoptopenjdk8
+
+  #- yes | sdkmanager --licenses || exit -33
+  #- exit 0
+
+  ## install android SDK
+  - export USE_SDK_WRAPPER
+  - wget http://dl.google.com/android/android-sdk_r24.4-macosx.zip
+  - tar -xf android-sdk_r24.4-macosx.zip #-v
+  - echo "TAR OK"
+  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter platform-tools
+  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter build-tools-23.0.2
+  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter android-23
+  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-support
+  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-m2repository
+  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-google-m2repository
+
+  - export ANDROID_HOME=$(pwd)/android-sdk-macosx
+  - export ANDROID_SDK_ROOT=$(pwd)/android-sdk-macosx
+  - export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2:${PATH}
+  - yes | sdkmanager --licenses || exit -33
+  - which sdkmanager
+  - env
 
 before_script:
-  # update npm and bower dependencies
-  - npm install
-  - bower update
+  ## update npm and bower dependencies
+  #- npm install
+  #- bower update
 
-  # run linters and tests
-  # if fails then build process stops
+  ## run linters and tests
+  ## if fails then build process stops
   # - gulp test
+  
 
 script:
-  # install android SDK
-  # -  wget http://dl.google.com/android/android-sdk_r24.4-macosx.zip
-  # -  tar -xvf android-sdk_r24.4-macosx.zip
+  - echo ---------ENV PIPPOZZO-----------
+  - ls -l /Library/Java/JavaVirtualMachines/
+  - ls -l /usr/local/share/android-sdk
+  - brew list --full-name
+  - brew cask list
+  - which zipalign
+  - env
   
-  # -  echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter platform-tools
-  # -  echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter build-tools-23.0.2
-  # -  echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter android-23
-  # -  echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-support
-  # -  echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-m2repository
-  # -  echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-google-m2repository
-  
-  # -  export ANDROID_HOME=./android-sdk-macosx
-  # -  export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2
 
-  # install build dependecies
+  ## install build dependecies
   - npm install -g cordova
   - npm install -g @ionic/cli native-run cordova-res
   - npm install --save-dev @angular-devkit/build-angular
   #- pod repo update #per far trovare onesignal
   
-  # - install plugins etc.
-  - ionic cordova prepare
-  - ionic cordova platform rm ios --save
+  ## install plugins etc.
+  #- ionic cordova prepare # forse inutile, testare...
+  - ionic cordova platform rm ios --save # necessario per fix errore
   - ionic cordova platform add ios@latest --save
+  - ionic cordova platform rm android --save
+  - ionic cordova platform add android@latest --save
   - ionic cordova plugin add onesignal-cordova-plugin
   - ionic cordova plugin add cordova-plugin-ionic-webview@latest
 
-  # build Android and iOS packages
-  #- cordova build android --release
-  #- ionic cordova build ios --device --release
-  - ionic cordova build ios --emulator --debug
+  ## build Android and iOS packages
+  - which sdkmanager
+  - yes | sdkmanager --licenses || exit -33
+  - ionic cordova build android
+  # - ionic cordova build android --prod --release -- --keystore=docentipush-chiave-playstore.keystore --alias=docentipush
+  # - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore docentipush-chiave-playstore.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk docentipush
+  # - zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk platforms/android/app/build/outputs/apk/release/app-release-signed-manuale.apk
+
+  #- ionic cordova build ios --device --release # servirebbe importare un certificato nel git
+  #- ionic cordova build ios --emulator --debug
 
 after_success:
   # generate documentation
@@ -68,3 +125,11 @@ after_success:
 
 deploy:
   # deploy build to s3, testflight etc.
+  # fastlane ...
+  provider: releases
+  api_key:
+    secure: feZ6c/AKev6Tj0hvnlnlQhKoJs00LrOtJTSrTmTbwEG3VfdLox1I56EctNcffp8lMF4mb73Mgus3Dj1vGC5lkXANPVscetrX0Mi/T7FL0p1/BDk1OTiNHupVnJdYl2Jmz7dhwZcSofTgj1n8OnhwKjm64tmWO0IYjIhRJDMkL9Obhhh4ovo+jI/sdmlXVYDKkyUqkmKC0JBGbAAxdJ28DHDq8cCP2FX5o91FSttceMUB9FaD5GMhx7q4WHxL0AZJcIsIrxNJaW/RhMejr8QjfV56UO2vuL6Q1O4JEP5iii1YwFe6GZLYaW67Wz6bXyF4dHA1nYTFC3aA7tqJxFKhYCgw99kb/V5ohU3q/B4ulmA9PhA2caSB+C/I30hZLKzAVBfkF3xBR4X9+AkKodoKcnHTTtlWRM7irfcPBlwgwQ0i3x4a5CbVZlOCkXwCjN8w2g0K+fAI/kYESMLjcJt8Rxe+gqa6vfAt5J6wtkwCiw7IuMPmpb23spKWgSfRA0f6PK0GjSig66e/ehf4m162bF6JgGyzjMHM75tnfep1MqcmBDQMbbcngkd+6BaE9uDWuhKz7Z18FBtkAF2tp8NI+zZDBZBl7v1ecnkf9k4BWKODtqXCjE9+iA2dd8mv0KzKvRf4TirVRMLBNX1SpAH1dA8RSgFNK3TDPLkulEJn3F4=
+  file: platforms/android/app/build/outputs/apk/release/app-release-signed-manuale.apk
+  on:
+    repo: RobertoD91/DocentiPush
+    branch: travis
