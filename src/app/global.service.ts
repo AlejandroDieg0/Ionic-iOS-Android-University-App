@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalService {
-  public bestia = '123';
-  public bestia2: any = 'tutto';
+  public testb1 = '123';
+  public testb2: any = 'tutto';
   constructor() {
-    console.log('GlobalService - vaffanculo');
+    console.log('GlobalService - vf');
   }
 }
