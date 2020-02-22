@@ -52,7 +52,7 @@ script:
   
   # - install plugins etc.
   - ionic cordova prepare
-  - ionic cordova platform rm android --save
+  - ionic cordova platform rm ios --save
   - ionic cordova platform add ios@latest --save
   - ionic cordova plugin add onesignal-cordova-plugin
   - ionic cordova plugin add cordova-plugin-ionic-webview@latest
