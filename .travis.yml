@@ -51,14 +51,16 @@ script:
   #- pod repo update #per far trovare onesignal
   
   # - install plugins etc.
-  - ionic cordova platform add ios@latest --save
   - ionic cordova prepare
+  - ionic cordova platform rm android --save
+  - ionic cordova platform add ios@latest --save
   - ionic cordova plugin add onesignal-cordova-plugin
   - ionic cordova plugin add cordova-plugin-ionic-webview@latest
 
   # build Android and iOS packages
   #- cordova build android --release
-  - ionic cordova build ios --device --release
+  #- ionic cordova build ios --device --release
+  - ionic cordova build ios --emulator --debug
 
 after_success:
   # generate documentation
