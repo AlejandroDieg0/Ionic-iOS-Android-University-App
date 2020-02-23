@@ -119,23 +119,30 @@ script:
   # - ionic cordova build android --prod --release -- --keystore=docentipush-chiave-playstore.keystore --alias=docentipush
   # - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore docentipush-chiave-playstore.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk docentipush
   # - zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk platforms/android/app/build/outputs/apk/release/app-release-signed-manuale.apk
-
+  
   # - ionic cordova build ios --device --release # servirebbe importare un certificato nel git
   # - ionic cordova build ios --emulator --debug
+  - ls -l /Users/travis/build/RobertoD91/DocentiPush/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+  - ls -l /Users/travis/build/RobertoD91/DocentiPush/platforms/android/app/build/outputs/apk/debug/
+  - cp /Users/travis/build/RobertoD91/DocentiPush/platforms/android/app/build/outputs/apk/debug/app-debug.apk /Users/travis/build/RobertoD91/pippo.apk
 
 after_success:
   # generate documentation
   # - gulp doc
+  - ls -l /Users/travis/build/RobertoD91/DocentiPush/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+  - ls -l /Users/travis/build/RobertoD91/DocentiPush/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+  - ls -l /Users/travis/build/RobertoD91/
 
 deploy:
   # deploy build to s3, testflight etc.
   # fastlane ...
+  skip_cleanup: true
   provider: releases
   api_key:
     secure: feZ6c/AKev6Tj0hvnlnlQhKoJs00LrOtJTSrTmTbwEG3VfdLox1I56EctNcffp8lMF4mb73Mgus3Dj1vGC5lkXANPVscetrX0Mi/T7FL0p1/BDk1OTiNHupVnJdYl2Jmz7dhwZcSofTgj1n8OnhwKjm64tmWO0IYjIhRJDMkL9Obhhh4ovo+jI/sdmlXVYDKkyUqkmKC0JBGbAAxdJ28DHDq8cCP2FX5o91FSttceMUB9FaD5GMhx7q4WHxL0AZJcIsIrxNJaW/RhMejr8QjfV56UO2vuL6Q1O4JEP5iii1YwFe6GZLYaW67Wz6bXyF4dHA1nYTFC3aA7tqJxFKhYCgw99kb/V5ohU3q/B4ulmA9PhA2caSB+C/I30hZLKzAVBfkF3xBR4X9+AkKodoKcnHTTtlWRM7irfcPBlwgwQ0i3x4a5CbVZlOCkXwCjN8w2g0K+fAI/kYESMLjcJt8Rxe+gqa6vfAt5J6wtkwCiw7IuMPmpb23spKWgSfRA0f6PK0GjSig66e/ehf4m162bF6JgGyzjMHM75tnfep1MqcmBDQMbbcngkd+6BaE9uDWuhKz7Z18FBtkAF2tp8NI+zZDBZBl7v1ecnkf9k4BWKODtqXCjE9+iA2dd8mv0KzKvRf4TirVRMLBNX1SpAH1dA8RSgFNK3TDPLkulEJn3F4=
   #file: platforms/android/app/build/outputs/apk/release/app-release-signed-manuale.apk
-  file: /Users/travis/build/RobertoD91/DocentiPush/platforms/android/app/build/outputs/apk/debug/app-debug.apk
-  skip_cleanup: true
+  #file: /Users/travis/build/RobertoD91/DocentiPush/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+  file: /Users/travis/build/RobertoD91/pippo.apk
   on:
     repo: RobertoD91/DocentiPush
     branch: travis
