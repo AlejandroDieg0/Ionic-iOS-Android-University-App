@@ -12,8 +12,8 @@ cache:
   npm: true
 
 addons:
-  homebrew: # non sembra funzionare
-    update: true
+  homebrew:
+    update: true # bug
     taps:
     #- homebrew/cask-versions
     - AdoptOpenJDK/openjdk
@@ -23,8 +23,8 @@ addons:
     #- node
     casks:
     - adoptopenjdk8
-    #- android-sdk
-    #- android-platform-tools
+    - android-sdk
+    - android-platform-tools
 
 env:
   #jobs:
@@ -40,38 +40,42 @@ before_install:
   - pwd
   - ls
   - ls ~
-  # - export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
-  # - export ANDROID_HOME=/usr/local/share/android-sdk
+  - export ANDROID_SDK_ROOT="/usr/local/share/android-sdk"
+  - export ANDROID_HOME=/usr/local/share/android-sdk
 
 install:
   ## install minimum set of dependencies to run tests and linters
-  #- npm install -g npm gulp bower
-  - brew install gradle
-  #- brew cask install android-platform-tools android-sdk
-  - brew tap AdoptOpenJDK/openjdk
-  - brew cask install adoptopenjdk8
-
-  #- yes | sdkmanager --licenses || exit -33
-  #- exit 0
+  # - npm install -g npm gulp bower
+  # - brew install gradle
+  # - brew cask install android-platform-tools android-sdk
+  # - brew tap AdoptOpenJDK/openjdk
+  # - brew cask install adoptopenjdk8
+  - export USE_SDK_WRAPPER
+  - which sdkmanager
+  - yes Y | sdkmanager --licenses >> /dev/null || exit -33
+  
+  - yes Y | sdkmanager platform-tools "build-tools;28.0.3" "platforms;android-28" "extras;android;m2repository" "extras;google;m2repository" "extras;android;m2repository" #extra-android-support
+  - yes Y | sdkmanager --licenses >> /dev/null || exit -34
+  - sdkmanager --licenses
 
   ## install android SDK
-  - export USE_SDK_WRAPPER
-  - wget http://dl.google.com/android/android-sdk_r24.4-macosx.zip
-  - tar -xf android-sdk_r24.4-macosx.zip #-v
-  - echo "TAR OK"
-  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter platform-tools
-  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter build-tools-23.0.2
-  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter android-23
-  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-support
-  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-m2repository
-  - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-google-m2repository
+  
+  # - wget http://dl.google.com/android/android-sdk_r24.4-macosx.zip
+  # - tar -xf android-sdk_r24.4-macosx.zip #-v
+  # - echo "TAR OK"
+  # - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter platform-tools
+  # - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter build-tools-28.0.3
+  # - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter android-28
+  # - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-support
+  # - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-android-m2repository
+  # - echo y | ./android-sdk-macosx/tools/android update sdk --no-ui --all --filter extra-google-m2repository
 
-  - export ANDROID_HOME=$(pwd)/android-sdk-macosx
-  - export ANDROID_SDK_ROOT=$(pwd)/android-sdk-macosx
-  - export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2:${PATH}
-  - yes | sdkmanager --licenses || exit -33
-  - which sdkmanager
-  - env
+  # - export ANDROID_HOME=$(pwd)/android-sdk-macosx
+  # - export ANDROID_SDK_ROOT=$(pwd)/android-sdk-macosx
+  # - export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2:${PATH}
+  # - yes | sdkmanager --licenses || exit -33
+  # - which sdkmanager
+  # - env
 
 before_script:
   ## update npm and bower dependencies
@@ -101,8 +105,8 @@ script:
   
   ## install plugins etc.
   #- ionic cordova prepare # forse inutile, testare...
-  - ionic cordova platform rm ios --save # necessario per fix errore
-  - ionic cordova platform add ios@latest --save
+  #- ionic cordova platform rm ios --save # necessario per fix errore
+  #- ionic cordova platform add ios@latest --save
   - ionic cordova platform rm android --save
   - ionic cordova platform add android@latest --save
   - ionic cordova plugin add onesignal-cordova-plugin
@@ -116,8 +120,8 @@ script:
   # - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore docentipush-chiave-playstore.keystore platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk docentipush
   # - zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk platforms/android/app/build/outputs/apk/release/app-release-signed-manuale.apk
 
-  #- ionic cordova build ios --device --release # servirebbe importare un certificato nel git
-  #- ionic cordova build ios --emulator --debug
+  # - ionic cordova build ios --device --release # servirebbe importare un certificato nel git
+  # - ionic cordova build ios --emulator --debug
 
 after_success:
   # generate documentation
