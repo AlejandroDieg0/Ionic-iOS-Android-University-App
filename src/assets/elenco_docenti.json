@@ -54,5 +54,19 @@
        "cognome" : "CASOLA",
        "nome" : "VALENTINA",
        "dipartimento" : "Dipartimento di Ingegneria elettrica e delle Tecnologie dell'Informazione - "
+    },
+    {
+      "codicefiscale" : "VLLLGU66T05A509X",
+      "cognome" : "VILLANI",
+      "dipartimento" : "Dipartimento di Ingegneria elettrica e delle Tecnologie dell'Informazione - ",
+      "id" : "4c5549474956494c4c414e49564c4c4c475536365430354135303958",
+      "nome" : "LUIGI"
+    },
+    {
+      "codicefiscale" : "MBRRRT82H30F839F",
+      "cognome" : "AMBROSINO",
+      "dipartimento" : "Dipartimento di Ingegneria elettrica e delle Tecnologie dell'Informazione - ",
+      "id" : "524f424552544f414d42524f53494e4f4d425252525438324833304638333946",
+      "nome" : "ROBERTO"
     }
 ]
