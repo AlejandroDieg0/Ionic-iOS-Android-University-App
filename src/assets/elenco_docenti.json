@@ -68,5 +68,12 @@
       "dipartimento" : "Dipartimento di Ingegneria elettrica e delle Tecnologie dell'Informazione - ",
       "id" : "524f424552544f414d42524f53494e4f4d425252525438324833304638333946",
       "nome" : "ROBERTO"
-    }
+    },
+    {
+      "codicefiscale" : "SFRNTN50D20F839G",
+      "cognome" : "SFORZA",
+      "dipartimento" : "Dipartimento di Ingegneria elettrica e delle Tecnologie dell'Informazione - VIA CLAUDIO, 21",
+      "id" : "414e544f4e494f53464f525a415346524e544e35304432304638333947",
+      "nome" : "ANTONIO"
+   }   
 ]
